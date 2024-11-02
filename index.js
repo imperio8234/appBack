@@ -7,7 +7,7 @@ require("./src/utils/mongoInit").connect();
 
 // confiuracion de cors
 const corsOptions = {
-    origin: "http://localhost:5173", 
+    origin: "http://157.245.246.81", 
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true
   };
