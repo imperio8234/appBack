@@ -54,6 +54,7 @@ const optenerLocation = async (req, res) => {
     const id = req.params.id
     
 try {
+    console.log("opteniendo locacion")
    const newLocation = await locations.find({
     "datos.location.idUser":id});
    if (!newLocation) {
@@ -70,6 +71,7 @@ try {
     message: "favoritos encontrados",
     data:newData
    })
+   console.log("locacion optenida")
 } catch (error) {
     res.status(500).json({
         success: false,

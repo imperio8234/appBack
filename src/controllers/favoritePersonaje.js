@@ -54,6 +54,7 @@ const optenerPersonaje = async (req, res) => {
     const id = req.params.id
     const idUser = req.params.id
 try {
+    console.log("personaje")
    const newPersonaje = await personajes.find({"datos.personaje.idUser": id});
    if (!newPersonaje) {
     res.status(404).json({
@@ -69,6 +70,8 @@ try {
     message: "favoritos encontrados",
     data:newData
    })
+
+   console.log("se adquirio el personaje")
 } catch (error) {
     res.status(500).json({
         success: false,

@@ -54,6 +54,7 @@ const optenerEpisode = async (req, res) => {
     const id = req.params.id;
     
 try {
+    console.log("opteniendo episodio")
    const newEpisode = await episodes.find({"datos.episode.idUser": id});
    //console.log(newEpisode)
    if (!newEpisode) {
@@ -70,6 +71,8 @@ try {
     message: "favoritos encontrados",
     data:newData
    })
+
+   console.log("episodio optenido exitosamente")
 } catch (error) {
     res.status(500).json({
         success: false,
