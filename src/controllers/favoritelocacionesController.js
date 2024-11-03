@@ -2,6 +2,7 @@ const locations = require("../models/model.locations")
 
 const saveLocation = async (req, res) => {
     const  Location = req.body;
+    
     try {
         const locationDB = await locations.find({"datos.location.id":Location.id, "datos.location.idUser": Location.idUser})
         if(locationDB.length > 0){
@@ -10,6 +11,7 @@ const saveLocation = async (req, res) => {
      const newLocation =  new locations({datos: {Location}});
      await newLocation.save().then((result) => {
            if (result) {
+            console.log(result)
             res.status(200).json({
                 success: true,
                 message: "se guardo en favoritos"
@@ -52,11 +54,11 @@ const getLocations = async (req, res) =>{
 
 const optenerLocation = async (req, res) => {
     const id = req.params.id
-    
 try {
     console.log("opteniendo locacion")
    const newLocation = await locations.find({
-    "datos.location.idUser":id});
+    "datos.Location.idUser":id});
+    
    if (!newLocation) {
     res.status(404).json({
         success: false,
@@ -64,14 +66,13 @@ try {
     })
     return;
    }
-   const newData =[].concat(...newLocation.map(item => item.datos.location));
+   const newData =[].concat(...newLocation.map(item => item.datos.Location));
 
    res.status(200).json({
     success:true,
     message: "favoritos encontrados",
     data:newData
    })
-   console.log("locacion optenida")
 } catch (error) {
     res.status(500).json({
         success: false,

@@ -2,11 +2,13 @@ const personajes = require("../models/model.favoritePersonaje")
 
 const savePersonaje = async (req, res) => {
     const  personaje = req.body;
+    
     try {
         const personajeDB = await personajes.find({"datos.personaje.id":personaje.id, "datos.personaje.idUser": personaje.idUser})
         if(personajeDB.length > 0){
             return;
         }
+
      const newPersonaje =  new personajes({datos: {personaje}});
      await newPersonaje.save().then((result) => {
            if (result) {
@@ -15,6 +17,7 @@ const savePersonaje = async (req, res) => {
                 message: "se guardo en favoritos"
             })
            }
+           console.log("se creo el personaje")
      })
     } catch (error) {
         
@@ -54,7 +57,7 @@ const optenerPersonaje = async (req, res) => {
     const id = req.params.id
     const idUser = req.params.id
 try {
-    console.log("personaje")
+    
    const newPersonaje = await personajes.find({"datos.personaje.idUser": id});
    if (!newPersonaje) {
     res.status(404).json({
